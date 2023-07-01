@@ -1,0 +1,17 @@
+<nb-card size="medium">
+  <nb-card-header>
+    <h3>Whatsapp Message Statistics</h3>
+    <div class="subtitle">Insights</div>
+  </nb-card-header>
+  <nb-card-body>
+    <div class="chart-container">
+      <div class="chart-header">
+      </div>
+      <ngx-whatsapp-analytics></ngx-whatsapp-analytics>
+    </div>
+  </nb-card-body>
+
+  <ngx-slide-out [showWhatsappStatistics]="true">
+    <ngx-whatsapp-stats></ngx-whatsapp-stats>
+  </ngx-slide-out>
+</nb-card>

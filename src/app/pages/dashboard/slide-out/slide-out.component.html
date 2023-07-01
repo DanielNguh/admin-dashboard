@@ -1,0 +1,12 @@
+<nb-icon [icon]="showWhatsappStatistics ? 'arrow-forward-outline' : 'arrow-back-outline'"
+         pack="eva"
+         class="show-hide-toggle"
+         (click)="toggleStatistics()">
+</nb-icon>
+<div class="slide-out-container"
+     [class.expanded]="showWhatsappStatistics"
+     [class.collapsed]="!showWhatsappStatistics">
+  <div class="content-wrapper">
+    <ng-content></ng-content>
+  </div>
+</div>

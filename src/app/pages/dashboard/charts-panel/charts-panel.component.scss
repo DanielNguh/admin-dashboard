@@ -1,0 +1,13 @@
+@import '../../../@theme/styles/themes.scss';
+
+@include nb-install-component() {
+
+  .echart {
+    height: 50%;
+  }
+  nb-card-body {
+    padding: 0;
+  }
+
+
+}
