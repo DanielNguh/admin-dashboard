@@ -13,6 +13,8 @@ import { UserService } from './mock/users.service';
 import { MockDataModule } from './mock/mock-data.module';
 import { HostInfoService } from './mock/host-info.service';
 import { LayoutService } from './utils/layout.service';
+import { ResourcesChartData } from './data/resources-chart';
+import { ResourcesChartService } from './mock/resources-chart.service';
 
 
 const socialLinks = [
@@ -36,6 +38,7 @@ const socialLinks = [
 const DATA_SERVICES = [
   { provide: UserData, useClass: UserService },
   { provide: HostInfoData, useClass: HostInfoService },
+  { provide: ResourcesChartData, useClass: ResourcesChartService}
 ];
 
 export class NbSimpleRoleProvider extends NbRoleProvider {

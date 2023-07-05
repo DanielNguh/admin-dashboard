@@ -1,18 +1,17 @@
-import { Component, OnDestroy } from '@angular/core';
-import { HostInfo, HostInfoData } from '../../../@core/data/host-info';
-import { filter, map, takeWhile } from 'rxjs/operators';
-import { HostInfoService } from 'app/@core/mock/host-info.service';
+import { Component, OnDestroy } from "@angular/core";
+import { HostInfo } from "../../../@core/data/host-info";
+import { filter, map, takeWhile } from "rxjs/operators";
+import { HostInfoService } from "app/@core/mock/host-info.service";
 
 @Component({
-  selector: 'ngx-host-info',
-  styleUrls: ['./host-info.component.scss'],
-  templateUrl: './host-info.component.html',
+  selector: "ngx-host-info",
+  styleUrls: ["./host-info.component.scss"],
+  templateUrl: "./host-info.component.html",
 })
 export class HostInfoComponent implements OnDestroy {
   private alive = true;
 
   hostInfoData: HostInfo[];
-  testValue: HostInfo[] | any;
   hostCount: number;
   connectedHosts: number;
   disconnectedHosts: number;
@@ -23,7 +22,7 @@ export class HostInfoComponent implements OnDestroy {
     .getHostInfo()
     .pipe(
       takeWhile(() => this.alive),
-      map((hosts) => hosts.length),
+      map((hosts) => hosts.length)
     )
     .subscribe((value) => {
       this.hostCount = value;
@@ -33,7 +32,7 @@ export class HostInfoComponent implements OnDestroy {
     .getHostInfo()
     .pipe(
       takeWhile(() => this.alive),
-      map((hosts) => hosts.filter((host) => host.connected === true).length),
+      map((hosts) => hosts.filter((host) => host.connected === true).length)
     )
     .subscribe((value) => {
       this.connectedHosts = value;
@@ -44,7 +43,7 @@ export class HostInfoComponent implements OnDestroy {
     .getHostInfo()
     .pipe(
       takeWhile(() => this.alive),
-      map((hosts) => hosts.filter((host) => host.connected === false).length),
+      map((hosts) => hosts.filter((host) => host.connected === false).length)
     )
     .subscribe((value) => {
       this.disconnectedHosts = value;

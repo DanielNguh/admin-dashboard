@@ -10,5 +10,5 @@ export interface HostInfo {
 }
 
 export abstract class HostInfoData {
-  abstract getHostInfoData(): Observable<HostInfo[]>;
+  abstract getHostInfo(): Observable<HostInfo[]>;
 }

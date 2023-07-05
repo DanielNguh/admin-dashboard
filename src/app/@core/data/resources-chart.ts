@@ -1,7 +1,4 @@
-export interface ResourcesChart {
-  chartLabel: string[];
-  linesData: number[][];
-}
+import { Observable } from "rxjs";
 
 export interface SystemResource {
   resource: string;
@@ -9,5 +6,5 @@ export interface SystemResource {
   timeStamp: Date;
 }
 export abstract class ResourcesChartData {
-  abstract getResourcesChartData(period: string): ResourcesChart;
+  abstract getResourcesChartData(): Observable<SystemResource[]>;
 }

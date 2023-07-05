@@ -1,10 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "cli": {
-    "analytics": false,
-    "cache": {
-      "enabled": false
-    }
+    "analytics": false
   },
   "version": 1,
   "newProjectRoot": "projects",
@@ -25,11 +22,7 @@
             "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",
             "polyfills": "src/polyfills.ts",
-            "assets": [
-              "src/assets",
-              "src/favicon.ico",
-              "src/favicon.png"
-            ],
+            "assets": ["src/assets", "src/favicon.ico", "src/favicon.png"],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.css",
               "node_modules/typeface-exo/index.css",
@@ -40,9 +33,7 @@
               "node_modules/pace-js/templates/pace-theme-flash.tmpl.css",
               "src/app/@theme/styles/styles.scss"
             ],
-            "scripts": [
-              "node_modules/pace-js/pace.min.js"
-            ]
+            "scripts": ["node_modules/pace-js/pace.min.js"]
           },
           "configurations": {
             "production": {
@@ -100,9 +91,7 @@
             "karmaConfig": "./karma.conf.js",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
-            "scripts": [
-              "node_modules/pace-js/pace.min.js"
-            ],
+            "scripts": ["node_modules/pace-js/pace.min.js"],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.css",
               "node_modules/typeface-exo/index.css",
@@ -113,20 +102,13 @@
               "node_modules/pace-js/templates/pace-theme-flash.tmpl.css",
               "src/app/@theme/styles/styles.scss"
             ],
-            "assets": [
-              "src/assets",
-              "src/favicon.ico",
-              "src/favicon.png"
-            ]
+            "assets": ["src/assets", "src/favicon.ico", "src/favicon.png"]
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "src/tsconfig.app.json",
-              "src/tsconfig.spec.json"
-            ],
+            "tsConfig": ["src/tsconfig.app.json", "src/tsconfig.spec.json"],
             "typeCheck": true,
             "exclude": []
           }
@@ -148,9 +130,7 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "e2e/tsconfig.e2e.json"
-            ],
+            "tsConfig": ["e2e/tsconfig.e2e.json"],
             "exclude": []
           }
         }
