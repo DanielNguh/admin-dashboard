@@ -2,7 +2,7 @@
   <nb-card-body>
     <div class="host-info">
       <div class="subtitle">Total Hosts</div>
-      <div class="h3">{{hostCount | ngxNumberWithCommas}}</div>
+      <div class="h3">{{ hostCount | ngxNumberWithCommas }}</div>
       <nb-progress-bar [value]="100"></nb-progress-bar>
       <div class="caption description">
         <bdi>Same as last week (100%)</bdi>
@@ -10,18 +10,26 @@
     </div>
     <div class="host-info">
       <div class="subtitle">Connected Hosts</div>
-      <div class="h3">{{connectedHosts | ngxNumberWithCommas}}</div>
+      <div class="h3">{{ connectedHosts | ngxNumberWithCommas }}</div>
       <nb-progress-bar [value]="percentConnected"></nb-progress-bar>
       <div class="caption description">
-        <bdi>Better than last week ({{percentConnected}}%)</bdi>
+        <bdi
+          >Better than last week ({{
+            percentConnected | number : "1.0-1"
+          }}%)</bdi
+        >
       </div>
     </div>
     <div class="host-info">
       <div class="subtitle">Disconnected Hosts</div>
-      <div class="h3">{{disconnectedHosts | ngxNumberWithCommas}}</div>
+      <div class="h3">{{ disconnectedHosts | ngxNumberWithCommas }}</div>
       <nb-progress-bar [value]="percentDisconnected"></nb-progress-bar>
       <div class="caption description">
-        <bdi>Better than last week ({{percentDisconnected}}%)</bdi>
+        <bdi
+          >Better than last week ({{
+            percentDisconnected | number : "1.0-1"
+          }}%)</bdi
+        >
       </div>
     </div>
   </nb-card-body>

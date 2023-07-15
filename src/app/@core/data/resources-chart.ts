@@ -3,8 +3,13 @@ import { Observable } from "rxjs";
 export interface SystemResource {
   resource: string;
   value: number;
-  timeStamp: Date;
+  createdAt: Date;
+}
+
+export interface SystemResourceChart {
+  chartLabel: string[];
+  linesData: number[][];
 }
 export abstract class ResourcesChartData {
-  abstract getResourcesChartData(): Observable<SystemResource[]>;
+  abstract getResourcesChartData(): SystemResourceChart;
 }
