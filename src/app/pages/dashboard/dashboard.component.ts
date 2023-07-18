@@ -86,8 +86,6 @@ export class DashboardComponent implements OnDestroy {
       .pipe(takeWhile(() => this.alive))
       .subscribe((resourcesChartData) => {
         this.resourcesChartData = resourcesChartData;
-        console.log(this.resourcesChartData);
-
       });
   }
 }

@@ -177,23 +177,16 @@ export class ChartsPanelComponent
         normal: {
           width: echarts.lineWidth,
           type: echarts.lineStyle,
-          color: new LinearGradient(0, 0, 0, 1, [{
-            offset: 0,
-            color: "rgb(54, 98, 245)",
-          }, {
-            offset: 1,
-            color: "rgb(65, 28, 230)",
-          }]),
         },
       },
       areaStyle: {
         normal: {
           color: new LinearGradient(0, 0, 0, 1, [{
             offset: 0,
-            color: "rgb(54, 98, 245)",
+            color: "rgb(0, 221, 255)",
           }, {
             offset: 1,
-            color: "rgb(65, 28, 230)",
+            color: "rgb(77, 119, 255)",
           }]),
         },
       },
@@ -221,23 +214,16 @@ export class ChartsPanelComponent
         normal: {
           width: echarts.lineWidth,
           type: echarts.lineStyle,
-          color: new LinearGradient(0, 0, 0, 1, [{
-            offset: 0,
-            color: "rgb(222, 24, 240)",
-          }, {
-            offset: 1,
-            color: "rgb(171, 15, 91)",
-          }]),
         },
       },
       areaStyle: {
         normal: {
           color: new LinearGradient(0, 0, 0, 1, [{
             offset: 0,
-            color: "rgb(222, 24, 240)",
+            color: "rgb(255, 0, 135)",
           }, {
             offset: 1,
-            color: "rgb(171, 15, 91)",
+            color: "rgb(135, 0, 157)",
           }]),
         },
       },

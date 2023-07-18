@@ -13,9 +13,16 @@ import { map } from "rxjs/operators";
 })
 export class ResourcesChartService extends ResourcesChartData {
   ramData: number[] = [];
+  ramTime: string[] = [];
+
   cpuData: number[] = [];
+  cpuTime: string[] = [];
+
   diskData: number[] = [];
-  timeStamps: string[] = [];
+  diskTime: string[] = [];
+
+  systemResources: any = [];
+  isDataAvailable: boolean = false;
 
   private data = {
     chartLabel: [],
@@ -32,6 +39,13 @@ export class ResourcesChartService extends ResourcesChartData {
         [7, 8, 9],
       ],
     };
+
+    this.getSystemResourcesData().subscribe((value: SystemResource[]) => {
+      this.systemResources = value;
+      this.extract();
+      this.isDataAvailable = true;
+      this.logSystemData();
+    });
   }
 
   // getTimeStamps(): string[] {
@@ -55,48 +69,22 @@ export class ResourcesChartService extends ResourcesChartData {
   //     });
   //   return this.timeStamps;
   // }
-  // getRamData(): number[] {
-  //   this.getResourcesChartData()
-  //     .pipe(
-  //       map((resources) =>
-  //         resources.filter((resource) => resource.resource == "RAM")
-  //       )
-  //     )
-  //     .subscribe((data) => {
-  //       data.forEach((element) => {
-  //         this.ramData.push(element.value);
-  //       });
-  //     });
-  //   return this.ramData;
-  // }
-  // getCpuData(): number[] {
-  //   this.getResourcesChartData()
-  //     .pipe(
-  //       map((resources) =>
-  //         resources.filter((resource) => resource.resource == "CPU")
-  //       )
-  //     )
-  //     .subscribe((data) => {
-  //       data.forEach((element) => {
-  //         this.cpuData.push(element.value);
-  //       });
-  //     });
-  //   return this.cpuData;
-  // }
-  // getDiskData(): number[] {
-  //   this.getResourcesChartData()
-  //     .pipe(
-  //       map((resources) =>
-  //         resources.filter((resource) => resource.resource == "Disk")
-  //       )
-  //     )
-  //     .subscribe((data) => {
-  //       data.forEach((element) => {
-  //         this.diskData.push(element.value);
-  //       });
-  //     });
-  //   return this.diskData;
-  // }
+
+  public extract() {
+    this.systemResources.forEach((resource) => {
+      resource.resource === "RAM"
+        ? this.ramData.push(resource.value)
+        : resource.resource === "CPU"
+        ? this.cpuData.push(resource.value)
+        : this.diskData.push(resource.value);
+    });
+  }
+
+  public logSystemData() {
+    if (this.isDataAvailable) {
+      console.log(this.ramData);
+    }
+  }
 
   getSystemResourcesData(): Observable<SystemResource[]> {
     return this.http.get<SystemResource[]>("/api/resources");
