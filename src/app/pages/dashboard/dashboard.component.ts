@@ -1,7 +1,5 @@
-import { Component, OnDestroy } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { NbThemeService } from "@nebular/theme";
-import { ChartsPanelData } from "app/@core/data/charts-panel";
-import { SystemResourceChart } from "app/@core/data/resources-chart";
 import { takeWhile } from "rxjs/operators";
 
 interface CardSettings {
@@ -15,10 +13,9 @@ interface CardSettings {
   styleUrls: ["./dashboard.component.scss"],
   templateUrl: "./dashboard.component.html",
 })
-export class DashboardComponent implements OnDestroy {
+export class DashboardComponent implements OnInit,OnDestroy {
   private alive = true;
 
-  resourcesChartData: SystemResourceChart;
 
   shutdownCard: CardSettings = {
     title: "Shut Down",
@@ -65,7 +62,6 @@ export class DashboardComponent implements OnDestroy {
 
   constructor(
     private themeService: NbThemeService,
-    private chartsPanelService: ChartsPanelData
   ) {
     this.themeService
       .getJsTheme()
@@ -73,19 +69,12 @@ export class DashboardComponent implements OnDestroy {
       .subscribe((theme) => {
         this.statusCards = this.statusCardsByThemes[theme.name];
       });
-    this.getResourcesData();
   }
 
+  ngOnInit(): void {
+  }
   ngOnDestroy() {
     this.alive = false;
   }
 
-  getResourcesData() {
-    this.chartsPanelService
-      .getResourcesChartData()
-      .pipe(takeWhile(() => this.alive))
-      .subscribe((resourcesChartData) => {
-        this.resourcesChartData = resourcesChartData;
-      });
-  }
 }

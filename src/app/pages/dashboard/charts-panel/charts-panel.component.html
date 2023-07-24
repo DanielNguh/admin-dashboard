@@ -1,6 +1,15 @@
-  <nb-card>
-    <nb-card-header>Resource Consumption</nb-card-header>
-    <nb-card-body>
-      <div echarts [options]="options" [merge]="options" class="echart" (chartInit)="onChartInit($event)"></div>
-    </nb-card-body>
-  </nb-card>
+<nb-card>
+  <nb-card-header>Resource Consumption</nb-card-header>
+  <nb-card-body>
+    <div
+      echarts
+      [options]="option"
+      [merge]="option"
+      class="echart"
+      (chartInit)="onChartInit($event)"
+    ></div>
+  </nb-card-body>
+  <!-- <nb-card-body>
+    <div echarts [options]="option"  class="echart"></div>
+  </nb-card-body> -->
+</nb-card>

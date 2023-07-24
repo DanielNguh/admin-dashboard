@@ -6,10 +6,6 @@ export interface SystemResource {
   createdAt: Date;
 }
 
-export interface SystemResourceChart {
-  chartLabel: string[];
-  linesData: number[][];
-}
 export abstract class ResourcesChartData {
-  abstract getResourcesChartData(): SystemResourceChart;
+  abstract getResourcesChartData(): Observable<SystemResource[]>;
 }
