@@ -1,80 +1,89 @@
-import { Component, AfterViewInit, OnDestroy } from '@angular/core';
-import { NbThemeService } from '@nebular/theme';
+import { Component, AfterViewInit, OnDestroy } from "@angular/core";
+import { NbThemeService } from "@nebular/theme";
+import { ContainerInfoService } from "app/@core/mock/container-info.service";
 
 @Component({
-  selector: 'ngx-container-info',
-  templateUrl: './container-info.component.html',
-  styleUrls: ['./container-info.component.scss'],
+  selector: "ngx-container-info",
+  templateUrl: "./container-info.component.html",
+  styleUrls: ["./container-info.component.scss"],
 })
 export class ContainerInfoComponent implements AfterViewInit, OnDestroy {
   options: any = {};
   themeSubscription: any;
 
-  constructor(private theme: NbThemeService) {}
+
+  constructor(
+    private theme: NbThemeService,
+    private containerInfoService: ContainerInfoService
+  ) {}
 
   ngAfterViewInit() {
     this.themeSubscription = this.theme.getJsTheme().subscribe((config) => {
       const colors = config.variables;
       const echarts: any = config.variables.echarts;
 
-      this.options = {
-        backgroundColor: echarts.bg,
-        color: [
-          colors.warningLight,
-          colors.infoLight,
-          colors.dangerLight,
-          colors.successLight,
-          colors.primaryLight,
-        ],
-        tooltip: {
-          trigger: 'item',
-          formatter: '{a} <br/>{b} : {c} ({d}%)',
-        },
-        legend: {
-          orient: 'vertical',
-          left: 'left',
-          data: ['Running', 'Stopped', 'Restarting', 'Exited', 'Paused'],
-          textStyle: {
-            color: echarts.textColor,
-          },
-        },
-        series: [
-          {
-            name: 'Container Info',
-            type: 'pie',
-            radius: '80%',
-            center: ['50%', '50%'],
-            data: [
-              { value: 335, name: 'Paused' },
-              { value: 310, name: 'Exited' },
-              { value: 234, name: 'Restarting' },
-              { value: 135, name: 'Stopped' },
-              { value: 1548, name: 'Running' },
+      this.containerInfoService
+        .getContainerInfoData()
+        .subscribe((containerInfo) => {
+          let containers = this.extract(containerInfo);
+          this.options = {
+            backgroundColor: echarts.bg,
+            color: [
+              colors.warningLight,
+              colors.infoLight,
+              colors.dangerLight,
+              colors.successLight,
+              colors.primaryLight,
             ],
-            itemStyle: {
-              emphasis: {
-                shadowBlur: 10,
-                shadowOffsetX: 0,
-                shadowColor: echarts.itemHoverShadowColor,
+            tooltip: {
+              trigger: "item",
+              formatter: "{a} <br/>{b} : {c} ({d}%)",
+            },
+            legend: {
+              orient: "vertical",
+              left: "left",
+              data: ["Running", "Restarting", "Exited", "Paused"],
+              textStyle: {
+                color: echarts.textColor,
               },
             },
-            label: {
-              normal: {
-                textStyle: {
-                  color: echarts.textColor,
+            series: [
+              {
+                name: "Container Info",
+                type: "pie",
+                radius: "80%",
+                center: ["50%", "50%"],
+                data: [
+                  { value: containers.paused, name: "Paused" },
+                  { value: containers.exited, name: "Exited" },
+                  { value: containers.restarting, name: "Restarting" },
+                  { value: containers.running, name: "Running" },
+                ],
+                itemStyle: {
+                  emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: echarts.itemHoverShadowColor,
+                  },
+                },
+                label: {
+                  normal: {
+                    textStyle: {
+                      color: echarts.textColor,
+                    },
+                  },
+                },
+                labelLine: {
+                  normal: {
+                    lineStyle: {
+                      color: echarts.axisLineColor,
+                    },
+                  },
                 },
               },
-            },
-            labelLine: {
-              normal: {
-                lineStyle: {
-                  color: echarts.axisLineColor,
-                },
-              },
-            },
-          },
-        ],
-      };
+            ],
+          };
+        });
     });
   }
 
@@ -82,4 +91,27 @@ export class ContainerInfoComponent implements AfterViewInit, OnDestroy {
     this.themeSubscription.unsubscribe();
   }
 
+  public extract(containerInfo): any {
+    let containersRunning = [];
+    let containersRestarting = [];
+    let containersExited = [];
+    let containersPaused = [];
+
+    containerInfo.forEach((container) => {
+      container.status === "running"
+        ? containersRunning.push(container.id)
+        : container.status === "restarting"
+        ? containersRestarting.push(container.id)
+        : container.status === "exited"
+        ? containersExited.push(container.id)
+        : containersPaused.push(container.id);
+    });
+
+    let running: number = containersRunning.length;
+    let restarting: number = containersRestarting.length;
+    let exited: number = containersExited.length;
+    let paused: number = containersPaused.length;
+
+    return { running, restarting, exited, paused };
+  }
 }

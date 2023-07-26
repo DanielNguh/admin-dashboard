@@ -104,6 +104,7 @@ export class ChartsPanelComponent
                   show: false,
                 },
                 axisLabel: {
+                  rotate: 45,
                   color: echarts.axisTextColor,
                   fontSize: echarts.axisFontSize,
                 },
