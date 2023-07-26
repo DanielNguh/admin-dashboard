@@ -5,12 +5,14 @@ import { UserService } from './users.service';
 import { HostInfoService } from './host-info.service';
 import { ResourcesChartService } from './resources-chart.service';
 import { ContainerInfoService } from './container-info.service';
+import { PodInfoService } from './pod-info.service';
 
 const SERVICES = [
   UserService,
   HostInfoService,
   ResourcesChartService,
-  ContainerInfoService
+  ContainerInfoService,
+  PodInfoService
 ];
 
 @NgModule({

@@ -1,3 +1,5 @@
+import { Observable } from "rxjs";
+
 export interface WhatsappMessage {
   receiverNumber: number;
   template: string;
@@ -6,4 +8,8 @@ export interface WhatsappMessage {
   body: string;
   timeStamp: Date;
   messageId: string;
+}
+
+export abstract class WhatsappMessageData {
+  abstract getWhatsappMessageData(): Observable<WhatsappMessage[]>;
 }

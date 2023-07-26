@@ -268,7 +268,7 @@ export class ChartsPanelComponent
     this.alive = false;
   }
 
-  public extract(systemResources) {
+  private extract(systemResources) {
     systemResources.forEach((resource) => {
       resource.resource === "RAM"
         ? this.ramData.push(resource.value)

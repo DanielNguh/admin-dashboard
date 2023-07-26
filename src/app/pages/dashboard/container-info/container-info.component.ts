@@ -91,7 +91,7 @@ export class ContainerInfoComponent implements AfterViewInit, OnDestroy {
     this.themeSubscription.unsubscribe();
   }
 
-  public extract(containerInfo): any {
+  private extract(containerInfo): any {
     let containersRunning = [];
     let containersRestarting = [];
     let containersExited = [];
