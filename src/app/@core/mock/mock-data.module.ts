@@ -6,13 +6,17 @@ import { HostInfoService } from './host-info.service';
 import { ResourcesChartService } from './resources-chart.service';
 import { ContainerInfoService } from './container-info.service';
 import { PodInfoService } from './pod-info.service';
+import { WhatsappMessageService } from './whatsapp-message.service';
+import { EventLogService } from './event-log.service';
 
 const SERVICES = [
   UserService,
   HostInfoService,
   ResourcesChartService,
   ContainerInfoService,
-  PodInfoService
+  PodInfoService,
+  WhatsappMessageService,
+  EventLogService
 ];
 
 @NgModule({

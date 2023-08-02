@@ -23,6 +23,10 @@ import { ContainerInfoData } from "./data/container-info";
 import { ContainerInfoService } from "./mock/container-info.service";
 import { PodInfoData } from "./data/pod-info";
 import { PodInfoService } from "./mock/pod-info.service";
+import { WhatsappMessageData } from "./data/whatsapp-message";
+import { WhatsappMessageService } from "./mock/whatsapp-message.service";
+import { EventLogData } from "./data/event-log";
+import { EventLogService } from "./mock/event-log.service";
 
 const socialLinks = [
   {
@@ -48,6 +52,8 @@ const DATA_SERVICES = [
   { provide: ResourcesChartData, useClass: ResourcesChartService },
   { provide: ContainerInfoData, useClass: ContainerInfoService },
   { provide: PodInfoData, useClass: PodInfoService },
+  { provide: WhatsappMessageData, useClass: WhatsappMessageService },
+  { provide: EventLogData, useClass: EventLogService },
 ];
 
 export class NbSimpleRoleProvider extends NbRoleProvider {

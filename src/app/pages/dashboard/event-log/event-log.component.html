@@ -2,11 +2,10 @@
   <nb-card-header>
     <span>Event Logs</span>
   </nb-card-header>
-
   <nb-list class="event-log-list">
-    <nb-list-item *ngFor="let item of eventLogs">
+    <nb-list-item *ngFor="let item of eventLogs$">
       <div class="event-date">
-        {{ item.date | date }}
+        {{ item.createdAt | date }}
       </div>
 
       <div class="event-type">
@@ -16,12 +15,12 @@
 
       <div class="event-severity">
         <div [ngSwitch]="item.severity">
-          <div *ngSwitchCase="'High'" [class.down]="true" class="delta">
+          <div *ngSwitchCase="'high'" [class.down]="true" class="delta">
             <nb-icon [icon]="'arrow-up'" pack="eva"></nb-icon>
             {{ item.severity }}
           </div>
           <div
-            *ngSwitchCase="'Medium'"
+            *ngSwitchCase="'medium'"
             [class.midway]="true"
             [class.down]="false"
             class="delta"
