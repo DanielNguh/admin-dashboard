@@ -264,7 +264,7 @@ export class ChartsPanelComponent
   }
 
   ngOnDestroy(): void {
-    this.themeSubscription.unsubscribe();
+    // this.themeSubscription.unsubscribe();
     this.alive = false;
   }
 

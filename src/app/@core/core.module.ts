@@ -5,7 +5,7 @@ import {
   SkipSelf,
 } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { NbAuthModule, NbDummyAuthStrategy } from "@nebular/auth";
+import { NbAuthJWTToken, NbAuthModule, NbDummyAuthStrategy, NbPasswordAuthStrategy} from "@nebular/auth";
 import { NbSecurityModule, NbRoleProvider } from "@nebular/security";
 import { of as observableOf } from "rxjs";
 import { HostInfoData } from "./data/host-info";
@@ -30,17 +30,17 @@ import { EventLogService } from "./mock/event-log.service";
 
 const socialLinks = [
   {
-    url: "https://github.com/akveo/nebular",
+    url: "https://github.com/DanielNguh",
     target: "_blank",
     icon: "github",
   },
   {
-    url: "https://www.facebook.com/akveo/",
+    url: "https://web.facebook.com/nguh.daniel.39",
     target: "_blank",
     icon: "facebook",
   },
   {
-    url: "https://twitter.com/akveo_inc",
+    url: "https://twitter.com/DanielNguh",
     target: "_blank",
     icon: "twitter",
   },
@@ -68,9 +68,33 @@ export const NB_CORE_PROVIDERS = [
   ...DATA_SERVICES,
   ...NbAuthModule.forRoot({
     strategies: [
-      NbDummyAuthStrategy.setup({
+      NbPasswordAuthStrategy.setup({
         name: "email",
-        delay: 3000,
+        token: {
+          class: NbAuthJWTToken,
+          key: 'token',
+        },
+        baseEndpoint: '',
+          login: {
+            endpoint: '/api/users/login',
+            method: 'post',
+          },
+          register: {
+            endpoint: '/api/users/signup',
+            method: 'post',
+          },
+          logout: {
+            endpoint: '/api/users/logout',
+            method: 'get',
+          },
+          requestPass: {
+            endpoint: '/api/users/request-pass',
+            method: 'post',
+          },
+          resetPass: {
+            endpoint: '/api/users/reset-pass',
+            method: 'post',
+          }
       }),
     ],
     forms: {
